@@ -37,8 +37,4 @@ dots.forEach((dot, index) => {
     });
 });
 
-/* Optional auto-slide every 5 seconds */
-
-setInterval(() => {
-    showSlide(currentIndex + 1);
-}, 5000);
+showSlide(0);

@@ -107,3 +107,25 @@ body {
         font-size: 18px;
     }
 }
+.fullscreen-btn {
+    width: 56px;
+    height: 56px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(12px);
+
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+
+    cursor: pointer;
+
+    font-size: 22px;
+
+    transition: 0.3s;
+}
+
+.fullscreen-btn:hover {
+    transform: scale(1.08);
+}

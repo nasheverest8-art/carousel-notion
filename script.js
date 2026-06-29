@@ -4,6 +4,9 @@ const dots = document.querySelectorAll(".dot");
 const prevBtn = document.querySelector(".prev");
 const nextBtn = document.querySelector(".next");
 
+const carousel = document.querySelector(".carousel");
+const fullscreenBtn = document.querySelector(".fullscreen-btn");
+
 let currentIndex = 0;
 
 function showSlide(index) {
@@ -35,6 +38,20 @@ dots.forEach((dot, index) => {
     dot.addEventListener("click", () => {
         showSlide(index);
     });
+
+    fullscreenBtn.addEventListener("click", () => {
+
+    if (!document.fullscreenElement) {
+
+        carousel.requestFullscreen();
+
+    } else {
+
+        document.exitFullscreen();
+
+    }
+
+});
 });
 
 showSlide(0);

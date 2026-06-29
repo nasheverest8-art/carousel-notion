@@ -1,57 +1,111 @@
-const slidesContainer = document.querySelector(".slides");
-const slides = document.querySelectorAll(".slide");
-const dots = document.querySelectorAll(".dot");
+const images = [
+    "images/image1.png",
+    "images/image2.png",
+    "images/image3.png",
+    "images/image4.png"
+    "images/image5.png"
+    "images/image6.png"
+    "images/image7.png"
+];
+
+const track = document.querySelector(".carousel-track");
+const dotsContainer = document.querySelector(".dots");
+
 const prevBtn = document.querySelector(".prev");
 const nextBtn = document.querySelector(".next");
 
-const carousel = document.querySelector(".carousel");
 const fullscreenBtn = document.querySelector(".fullscreen-btn");
+
+const modal = document.querySelector(".fullscreen-modal");
+const fsImage = document.querySelector(".fs-image");
+
+const fsPrev = document.querySelector(".fs-prev");
+const fsNext = document.querySelector(".fs-next");
+const fsClose = document.querySelector(".fs-close");
 
 let currentIndex = 0;
 
-function showSlide(index) {
 
-    if (index < 0) {
-        currentIndex = slides.length - 1;
-    } else if (index >= slides.length) {
-        currentIndex = 0;
-    } else {
+/* Create slides */
+
+images.forEach((src, index) => {
+
+    const slide = document.createElement("div");
+    slide.className = "slide";
+
+    slide.innerHTML = `<img src="${src}" alt="">`;
+
+    track.appendChild(slide);
+
+    const dot = document.createElement("div");
+    dot.className = "dot";
+
+    dot.addEventListener("click", () => {
         currentIndex = index;
-    }
+        updateCarousel();
+    });
 
-    slidesContainer.style.transform =
+    dotsContainer.appendChild(dot);
+});
+
+const dots = document.querySelectorAll(".dot");
+
+
+function updateCarousel() {
+
+    track.style.transform =
         `translateX(-${currentIndex * 100}%)`;
 
     dots.forEach(dot => dot.classList.remove("active"));
     dots[currentIndex].classList.add("active");
+
+    fsImage.src = images[currentIndex];
 }
 
-nextBtn.addEventListener("click", () => {
-    showSlide(currentIndex + 1);
+
+function nextSlide() {
+    currentIndex = (currentIndex + 1) % images.length;
+    updateCarousel();
+}
+
+function prevSlide() {
+    currentIndex =
+        (currentIndex - 1 + images.length) % images.length;
+    updateCarousel();
+}
+
+
+nextBtn.addEventListener("click", nextSlide);
+prevBtn.addEventListener("click", prevSlide);
+
+fullscreenBtn.addEventListener("click", () => {
+    modal.classList.add("open");
+    fsImage.src = images[currentIndex];
 });
 
-prevBtn.addEventListener("click", () => {
-    showSlide(currentIndex - 1);
+fsClose.addEventListener("click", () => {
+    modal.classList.remove("open");
 });
 
-dots.forEach((dot, index) => {
-    dot.addEventListener("click", () => {
-        showSlide(index);
-    });
+fsNext.addEventListener("click", nextSlide);
+fsPrev.addEventListener("click", prevSlide);
 
-    fullscreenBtn.addEventListener("click", () => {
 
-    if (!document.fullscreenElement) {
+/* Keyboard controls */
 
-        carousel.requestFullscreen();
+document.addEventListener("keydown", e => {
 
-    } else {
+    if (modal.classList.contains("open")) {
 
-        document.exitFullscreen();
+        if (e.key === "ArrowRight")
+            nextSlide();
 
+        if (e.key === "ArrowLeft")
+            prevSlide();
+
+        if (e.key === "Escape")
+            modal.classList.remove("open");
     }
-
-});
 });
 
-showSlide(0);
+updateCarousel();

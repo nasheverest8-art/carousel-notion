@@ -3,41 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Carousel</title>
+    <title>Notion Carousel</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="carousel-wrapper">
+<div class="carousel-wrapper">
 
-        <button class="nav prev">&#10094;</button>
+    <button class="nav-btn prev">←</button>
 
-        <div class="carousel">
-            <div class="slides">
-                <img src="images/image1.png" class="slide">
-                <img src="images/image2.png" class="slide">
-                <img src="images/image3.png" class="slide">
-                <img src="images/image4.png" class="slide">
-                <img src="images/image5.png" class="slide">
-                <img src="images/image6.png" class="slide">
-                <img src="images/image7.png" class="slide">
-            </div>
-        </div>
+    <div class="carousel-container">
 
-        <button class="nav next">&#10095;</button>
-        
-        <button class="fullscreen-btn">⛶</button>
+        <div class="carousel-track"></div>
+
+        <div class="dots"></div>
+
+        <button class="fullscreen-btn">⤢</button>
 
     </div>
 
-    <div class="dots">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-    </div>
+    <button class="nav-btn next">→</button>
 
-    <script src="script.js"></script>
+</div>
+
+
+<!-- Fullscreen Modal -->
+<div class="fullscreen-modal">
+
+    <button class="fs-close">✕</button>
+
+    <button class="fs-nav fs-prev">←</button>
+
+    <img class="fs-image" src="" alt="">
+
+    <button class="fs-nav fs-next">→</button>
+
+</div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
